@@ -10,4 +10,6 @@
     <string name="coordinates">Coordinates:</string>
     <string name="textview">TextView</string>
     <string name="country">Country:</string>
+    <string name="eartquake_filter">Earthquake Filter</string>
+    <string name="implement_OnDialogList">\" must implement OnDialogListener\"</string>
 </resources>
