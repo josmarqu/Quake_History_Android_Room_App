@@ -1,11 +1,14 @@
 package com.example.quakehistory.db.room_tables;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 @Entity (
+        tableName = "ctry_affected",
+        primaryKeys = {"date", "country"},
         foreignKeys = {
                 @ForeignKey(
                         entity = EarthQuake.class,
@@ -13,12 +16,13 @@ import androidx.room.PrimaryKey;
                         childColumns = "date",
                         onDelete = ForeignKey.CASCADE
                 )
-        },
-        tableName = "ctry_affected"
+        }
 )
 public class CtryAffected {
-    @PrimaryKey
+    @NonNull
     public String date;
-    @PrimaryKey
+
+    @NonNull
+    @ColumnInfo(name = "country")
     public String country;
 }

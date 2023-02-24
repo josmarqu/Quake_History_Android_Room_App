@@ -1,5 +1,6 @@
 package com.example.quakehistory.db.room_tables;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
@@ -10,6 +11,7 @@ import androidx.room.PrimaryKey;
         tableName = "earth_quake"
 )
 public class EarthQuake {
+    @NonNull
     @PrimaryKey
     public String date;
 
