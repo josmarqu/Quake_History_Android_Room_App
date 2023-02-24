@@ -13,6 +13,13 @@
         android:theme="@style/Theme.QuakeHistory"
         tools:targetApi="33">
         <activity
+            android:name=".QuakeHistory"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <meta-data
@@ -20,6 +27,5 @@
                 android:value="" />
         </activity>
     </application>
-
 
 </manifest>

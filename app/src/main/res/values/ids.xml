@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="btnShow" type="id" />
+    <item name="tvItemDate" type="id" />
+    <item name="tvName" type="id" />
+    <item name="tvItemDevName" type="id" />
+    <item name="tvItemLocation" type="id" />
 </resources>

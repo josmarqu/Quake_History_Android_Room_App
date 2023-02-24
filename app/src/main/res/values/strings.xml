@@ -2,4 +2,6 @@
     <string name="app_name">QuakeHistory</string>
     <string name="quake_history">QUAKE HISTORY</string>
     <string name="show">SHOW</string>
+    <string name="date">Date:</string>
+    <string name="title">Title</string>
 </resources>
