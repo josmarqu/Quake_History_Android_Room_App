@@ -1,6 +1,9 @@
 package com.example.quakehistory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,20 +17,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class QuakeHistory extends AppCompatActivity implements OnDialogListener{
-   private Button btnFilter;
+public class QuakeHistory extends AppCompatActivity implements OnDialogListener {
+    private Button btnFilter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake_history);
         initButton();
         initDataLoad();
-        initRvLoad();
+        ArrayList<EarthQuake> earthQuakes = new ArrayList<>();
+        for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAll()) {
+            earthQuakes.add(eq);
+        }
+        initRvLoad(earthQuakes);
     }
 
-    private void initRvLoad() {
-
-    }
 
     private void initDataLoad() {
         File dbFile = getDatabasePath("earth_quake_db");
@@ -47,10 +52,18 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener{
         for (CtryAffected ctry : ctryAffected) {
             eqDB.countryDao().insert(ctry);
         }
+    }
 
 
+    private void initRvLoad(ArrayList<EarthQuake> earthQuakes) {
+        EqAdapter adapter = new EqAdapter(earthQuakes, this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView rvEarthQuake = findViewById(R.id.rvQuakeHistory);
+        rvEarthQuake.setLayoutManager(layoutManager);
+        rvEarthQuake.setItemAnimator(new DefaultItemAnimator());
+        rvEarthQuake.setAdapter(adapter);
+    }
 
-        }
 
     private ArrayList<CtryAffected> loadArrayCtry() {
         ArrayList<CtryAffected> listCtry = new ArrayList<>(Arrays.asList(
