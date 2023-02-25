@@ -41,7 +41,7 @@ public class DialogFilter extends DialogFragment {
             btnApply.setOnClickListener(view -> {
                 try {
                     String mag = etMag.getText().toString();
-                    String magValue = spnMag.getSelectedItem().toString();
+                    float magValue = Float.parseFloat(mag);
                     String ctry = spnCtry.getSelectedItem().toString();
                     mListener.onDialogPositiveClick(mag, magValue, ctry);
                     ad.dismiss();

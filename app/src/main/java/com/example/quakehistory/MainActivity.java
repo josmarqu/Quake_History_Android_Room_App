@@ -1,12 +1,13 @@
 package com.example.quakehistory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements OnDialogListener{
+public class MainActivity extends AppCompatActivity {
     private Button btnShow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +19,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogListener{
     private void initButton() {
         btnShow = findViewById(R.id.btnShow);
         btnShow.setOnClickListener(v -> {
-            DialogFilter dialogFilter = new DialogFilter();
-            dialogFilter.setCancelable(false);
-            dialogFilter.show(getSupportFragmentManager(), "dialogFilter");
+            Intent intent = new Intent(this, QuakeHistory.class);
+            startActivity(intent);
         });
         }
-
-    @Override
-    public void onDialogPositiveClick(String mag, String magValue, String ctry) {
-    }
-
 }
