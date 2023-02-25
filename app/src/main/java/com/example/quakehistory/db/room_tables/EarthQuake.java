@@ -19,7 +19,7 @@ public class EarthQuake {
     public String deviceName;
 
     @ColumnInfo(name = "magnitude")
-    public float magnitude;
+    public Double magnitude;
 
     @ColumnInfo(name = "coordinates")
     public String coordinates;
@@ -28,5 +28,26 @@ public class EarthQuake {
     public String location;
 
     @ColumnInfo(name = "death_toll")
-    public int deathToll;
+    public String deathToll;
+
+    public EarthQuake(@NonNull String date, Double magnitude, String deviceName,  String location, String coordinates, String deathToll) {
+        this.date = date;
+        this.deviceName = deviceName;
+        this.magnitude = magnitude;
+        this.coordinates = coordinates;
+        this.location = location;
+        this.deathToll = deathToll;
+    }
+
+    @Override
+    public String toString() {
+        return "EarthQuake{" +
+                "date='" + date + '\'' +
+                ", deviceName='" + deviceName + '\'' +
+                ", magnitude=" + magnitude +
+                ", coordinates='" + coordinates + '\'' +
+                ", location='" + location + '\'' +
+                ", deathToll='" + deathToll + '\'' +
+                '}';
+    }
 }

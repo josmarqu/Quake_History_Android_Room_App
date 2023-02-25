@@ -25,4 +25,9 @@ public class CtryAffected {
     @NonNull
     @ColumnInfo(name = "country")
     public String country;
+
+    public CtryAffected(@NonNull String date, @NonNull String country) {
+        this.date = date;
+        this.country = country;
+    }
 }
