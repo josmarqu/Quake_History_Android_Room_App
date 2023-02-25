@@ -53,14 +53,16 @@ public class EqAdapter extends RecyclerView.Adapter<EqAdapter.EqViewHolder> {
         holder.tvDt.setText(context.getResources().getString(R.string.death_toll) + " " + eq.deathToll);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+        int marginTopBot = (int) context.getResources().getDimension(R.dimen.margItem);
+        int marginTop =  (int) context.getResources().getDimension(R.dimen.margItemTop);
         if (position == 0) {
-               layoutParams.setMargins(0, 240, 0, 0);
+               layoutParams.setMargins(0, marginTopBot , 0, 0);
         }
         else if (position == eqList.size() - 1) {
-            layoutParams.setMargins(0, 40, 0, 240);
+            layoutParams.setMargins(0, marginTop, 0, marginTopBot);
         }
         else {
-            layoutParams.setMargins(0, 40, 0, 0);
+            layoutParams.setMargins(0, marginTop, 0, 0);
         }
 
         holder.itemView.setLayoutParams(layoutParams);

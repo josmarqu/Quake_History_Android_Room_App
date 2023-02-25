@@ -11,7 +11,7 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="-100dp"
+        android:layout_marginBottom="-80dp"
         android:background="@drawable/semicircle_shape"
         android:clickable="false"
         android:text="@string/quake_history"
