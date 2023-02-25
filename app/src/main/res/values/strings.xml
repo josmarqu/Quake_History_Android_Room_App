@@ -12,4 +12,5 @@
     <string name="country">Country:</string>
     <string name="eartquake_filter">Earthquake Filter</string>
     <string name="implement_OnDialogList">\" must implement OnDialogListener\"</string>
+    <string name="filter">FILTER</string>
 </resources>
