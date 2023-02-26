@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
@@ -45,17 +47,38 @@ public class DialogFilter extends DialogFragment {
 
         ad.setOnShowListener(dialogInterface -> {
             Button btnApply = ad.getButton(AlertDialog.BUTTON_POSITIVE);
+
             btnApply.setOnClickListener(view -> {
-                try {
-                    String mag = spnMag.getSelectedItem().toString();
-                    double magValue = Double.parseDouble(etMag.getText().toString());
+
+                    String mag = spnMag.getSelectedItem().toString().trim();
+                    String magValueStr = etMag.getText().toString().trim();
+                    double magValue = 0.0;
+                    if (!mag.isEmpty() && magValueStr.isEmpty())
+                    {
+                        Toast.makeText(getContext(), "Please enter a magnitude value", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else if (!magValueStr.isEmpty() && mag.isEmpty())
+                    {
+                        Toast.makeText(getContext(), "Please select a magnitude operator", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else if (mag.isEmpty() && magValueStr.isEmpty())
+                    {
+                        mag = "Any";
+                        magValue = 0.0;
+                    }
+                    else {
+                        magValue = Double.parseDouble(magValueStr);
+                        if (magValue > 10.0)
+                        {
+                            Toast.makeText(getContext(), "Magnitude value must be less than 10.0", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
                     String ctry = spnCtry.getSelectedItem().toString();
                     mListener.onDialogPositiveClick(mag, magValue, ctry);
                     ad.dismiss();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    // TODO: handle exceptions
-                }
             });
         });
         return ad;
@@ -63,8 +86,9 @@ public class DialogFilter extends DialogFragment {
 
     private void initSpnCtry(View v)
     {
-        ArrayList<String> ctryList;
-        ctryList = (ArrayList<String>) EarthQuakeDB.getDatabase(getContext()).countryDao().getAllCountries();
+        ArrayList<String> ctryList = new ArrayList<>();
+        ctryList.add("All");
+        ctryList.addAll(EarthQuakeDB.getDatabase(getContext()).countryDao().getAllCountries());
         spnCtry = v.findViewById(R.id.spnCtry);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spn_ctry_selected_ite, ctryList);
         adapter.setDropDownViewResource(R.layout.spn_ctry);

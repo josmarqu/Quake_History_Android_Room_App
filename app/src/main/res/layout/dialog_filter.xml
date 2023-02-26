@@ -67,10 +67,10 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/soft_green"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="0"
                 android:textAlignment="center"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:inputType="numberDecimal"
+                />
 
         </LinearLayout>
 

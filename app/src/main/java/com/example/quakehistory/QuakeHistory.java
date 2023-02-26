@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.quakehistory.db.EarthQuakeDB;
 import com.example.quakehistory.db.room_tables.CtryAffected;
@@ -19,12 +21,13 @@ import java.util.Arrays;
 
 public class QuakeHistory extends AppCompatActivity implements OnDialogListener {
     private Button btnFilter;
+    private Button tittle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quake_history);
-        initButton();
+        initButtons();
         initDataLoad();
         ArrayList<EarthQuake> earthQuakes = new ArrayList<>();
         for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAll()) {
@@ -156,17 +159,45 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
         return earthQuakes;
     }
 
-    private void initButton() {
+    private void initButtons() {
         btnFilter = findViewById(R.id.btnFilter);
         btnFilter.setOnClickListener(v -> {
             DialogFilter dialogFilter = new DialogFilter();
             dialogFilter.setCancelable(false);
             dialogFilter.show(getSupportFragmentManager(), "dialogFilter");
         });
+        tittle = findViewById(R.id.tittle);
     }
 
     @Override
-    public void onDialogPositiveClick(String mag, double magValue, String ctry) {
-        System.out.println("Mag: " + mag + " MagValue: " + magValue + " Ctry: " + ctry);
+    public void onDialogPositiveClick(String operator, double magValue, String ctry) {
+        tittle.setTextSize(14);
+        tittle.setText("Magnitude: " + operator + " " + magValue + " " + "Country: " + ctry);
+        ArrayList<EarthQuake> earthQuakes = new ArrayList<>();
+        if (operator.equals("Any") && ctry.equals("All")) {
+            for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAll()) {
+                earthQuakes.add(eq);
+            }
+        }
+        else if (operator.equals("Any") && !ctry.equals("All")) {
+            for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAllByCountry(ctry)) {
+                earthQuakes.add(eq);
+            }
+
+        }
+        else if (ctry.equals("All") && !operator.equals("Any")) {
+            for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAllByMag(magValue, operator)) {
+                earthQuakes.add(eq);
+            }
+        }
+        else{
+            for (EarthQuake eq : EarthQuakeDB.getDatabase(this).eqDao().getAllByMagAndCountry(magValue, operator, ctry)) {
+                earthQuakes.add(eq);
+            }
+        }
+        if (earthQuakes.size() == 0) {
+            Toast.makeText(this, "No results found", Toast.LENGTH_SHORT).show();
+        }
+        initRvLoad(earthQuakes);
     }
 }
