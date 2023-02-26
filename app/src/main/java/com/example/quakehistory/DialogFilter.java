@@ -24,7 +24,7 @@ public class DialogFilter extends DialogFragment {
         etMag = v.findViewById(R.id.etMag);
         spnCtry = v.findViewById(R.id.spnCtry);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle);
         builder.setView(v);
 
         builder.setTitle(R.string.eartquake_filter)
@@ -34,6 +34,7 @@ public class DialogFilter extends DialogFragment {
                 });
 
         AlertDialog ad = builder.create();
+        ad.getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.dialog_bg));
         ad.setCanceledOnTouchOutside(false);
 
         ad.setOnShowListener(dialogInterface -> {
