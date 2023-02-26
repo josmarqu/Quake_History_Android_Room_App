@@ -30,4 +30,12 @@ public class CtryAffected {
         this.date = date;
         this.country = country;
     }
+
+    @Override
+    public String toString() {
+        return "CtryAffected{" +
+                "date='" + date + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

@@ -17,4 +17,5 @@ public interface EqDao {
     // insert earth quake
     @Insert
     public long insert(EarthQuake earthQuake);
+
 }

@@ -4,11 +4,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.quakehistory.db.EarthQuakeDB;
+
+import java.util.ArrayList;
 
 public class DialogFilter extends DialogFragment {
     OnDialogListener mListener;
@@ -22,7 +27,8 @@ public class DialogFilter extends DialogFragment {
 
         spnMag = v.findViewById(R.id.spnMag);
         etMag = v.findViewById(R.id.etMag);
-        spnCtry = v.findViewById(R.id.spnCtry);
+        initSpnCtry(v);
+
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle);
         builder.setView(v);
@@ -41,8 +47,8 @@ public class DialogFilter extends DialogFragment {
             Button btnApply = ad.getButton(AlertDialog.BUTTON_POSITIVE);
             btnApply.setOnClickListener(view -> {
                 try {
-                    String mag = etMag.getText().toString();
-                    float magValue = Float.parseFloat(mag);
+                    String mag = spnMag.getSelectedItem().toString();
+                    double magValue = Double.parseDouble(etMag.getText().toString());
                     String ctry = spnCtry.getSelectedItem().toString();
                     mListener.onDialogPositiveClick(mag, magValue, ctry);
                     ad.dismiss();
@@ -53,6 +59,16 @@ public class DialogFilter extends DialogFragment {
             });
         });
         return ad;
+    }
+
+    private void initSpnCtry(View v)
+    {
+        ArrayList<String> ctryList;
+        ctryList = (ArrayList<String>) EarthQuakeDB.getDatabase(getContext()).countryDao().getAllCountries();
+        spnCtry = v.findViewById(R.id.spnCtry);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spn_ctry_selected_ite, ctryList);
+        adapter.setDropDownViewResource(R.layout.spn_ctry);
+        spnCtry.setAdapter(adapter);
     }
 
     @Override

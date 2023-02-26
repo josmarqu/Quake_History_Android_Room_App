@@ -166,7 +166,7 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
     }
 
     @Override
-    public void onDialogPositiveClick(String mag, float magValue, String ctry) {
+    public void onDialogPositiveClick(String mag, double magValue, String ctry) {
         System.out.println("Mag: " + mag + " MagValue: " + magValue + " Ctry: " + ctry);
     }
 }

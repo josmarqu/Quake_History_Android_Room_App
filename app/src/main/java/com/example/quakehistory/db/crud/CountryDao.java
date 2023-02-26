@@ -14,6 +14,10 @@ public interface CountryDao {
     @Query("SELECT * FROM ctry_affected")
     public List<CtryAffected> getAll();
 
+    // get all countriesAffected names
+    @Query("SELECT country FROM ctry_affected")
+    public List<String> getAllCountries();
+
     // insert countryAffected
     @Insert
     public long insert(CtryAffected ctryAffected);
