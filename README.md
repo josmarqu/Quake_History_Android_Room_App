@@ -1,5 +1,5 @@
 # QuakeHistory_Android_App
-Application that allows to consult information using room-persistance-library and a sqlite database.
+An Android Application that allows to consult information using room-persistance-library and a sqlite database.
 
 ## About the App
 
