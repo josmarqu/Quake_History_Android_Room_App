@@ -36,7 +36,6 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
         initRvLoad(earthQuakes);
     }
 
-
     private void initDataLoad() {
         File dbFile = getDatabasePath("earth_quake_db");
         if (dbFile.exists()) {
@@ -57,7 +56,6 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
         }
     }
 
-
     private void initRvLoad(ArrayList<EarthQuake> earthQuakes) {
         EqAdapter adapter = new EqAdapter(earthQuakes, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -67,13 +65,12 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
         rvEarthQuake.setAdapter(adapter);
     }
 
-
     private ArrayList<CtryAffected> loadArrayCtry() {
         ArrayList<CtryAffected> listCtry = new ArrayList<>(Arrays.asList(
                 new CtryAffected("May 22, 1960, 15:11", "Chile"),
                 new CtryAffected("December 26, 2004, 07:58", "Indonesia"),
-                new CtryAffected("March 27 1964, 17:36", "United States"),
-                new CtryAffected("March 11 2011, 14:46", "Japan"),
+                new CtryAffected("March 27, 1964, 17:36", "United States"),
+                new CtryAffected("March 11, 2011, 14:46", "Japan"),
                 new CtryAffected("November 4, 1952, 16:58", "Russia"),
                 new CtryAffected("August 13, 1868, 21:30", "Chile"),
                 new CtryAffected("October 28, 1746, 22:30", "Peru"),
@@ -155,7 +152,7 @@ public class QuakeHistory extends AppCompatActivity implements OnDialogListener 
                         "Off the coast of Canela, Coquimbo Region", "31°34′52′′S 71°45′07′′W", "12"),
                 new EarthQuake("June 23, 2001, 15:33", 8.4, "2001 southern Peru earthquake",
                         "Departments of Arequipa, Moquegua, and Tacna", "16°15′36′′S 73°38′24′′W", "102"),
-                new EarthQuake("6 de febrero de 2023, 01:17", 7.8, "Terremoto de Turquía y Siria 2023",
+                new EarthQuake("February 6, 2023, 01:17", 7.8, "Terremoto de Turquía y Siria 2023",
                         "Turquía, Siria", "37°10′26′′N 37°01′55′′E", "40120")));
         return listEq;
     }

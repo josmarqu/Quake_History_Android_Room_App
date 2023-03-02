@@ -10,8 +10,8 @@ import java.util.List;
 
 @Dao
 public interface CountryDao {
-    // get all countriesAffected names
-    @Query("SELECT country FROM ctry_affected")
+    // get all countriesAffected names not duplicates
+    @Query("SELECT DISTINCT country FROM ctry_affected")
     public List<String> getAllCountries();
 
     // insert countryAffected
